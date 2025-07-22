@@ -170,124 +170,127 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
-          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover opacity-80" priority />
-          <div className="absolute inset-0 bg-black/40" />
+          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
+          {/* Gradient overlay - fully black at top, gradually revealing background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div className="space-y-8">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-[#6559FF] text-sm font-semibold tracking-wider uppercase"
-            >
-              <AnimatedText text="ARTIFICIAL INTELLIGENCE AND ROBOTICS" delay={0.5} />
-            </motion.p>
+        <div className="relative z-10 w-full h-full min-h-screen flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center h-full">
+            <motion.div className="space-y-8 lg:py-20">
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-[#6559FF] text-sm font-semibold tracking-wider uppercase"
+              >
+                <AnimatedText text="ARTIFICIAL INTELLIGENCE AND ROBOTICS" delay={0.5} />
+              </motion.p>
 
-            <div className="space-y-4">
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
+              <div className="space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7, duration: 0.8 }}
+                >
+                  <AnimatedText
+                    text="Simplify."
+                    className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight block"
+                    delay={0.8}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.9, duration: 0.8 }}
+                >
+                  <AnimatedText
+                    text="Automate."
+                    className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight block text-[#6559FF]"
+                    delay={1.2}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.1, duration: 0.8 }}
+                >
+                  <AnimatedText
+                    text="Succeed."
+                    className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight block"
+                    delay={1.6}
+                  />
+                </motion.div>
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2, duration: 0.6 }}
+                className="text-lg md:text-xl text-gray-200 max-w-lg"
               >
                 <AnimatedText
-                  text="Simplify."
-                  className="text-5xl lg:text-7xl font-bold leading-tight block"
-                  delay={0.8}
+                  text="Digitale Lösungen, die begeistern – automatisiert, sicher, skalierbar."
+                  delay={2.2}
+                  simple={true}
                 />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9, duration: 0.8 }}
+              </motion.p>
+
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.5 }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 10px 30px rgba(101, 89, 255, 0.4)",
+                  background: "linear-gradient(45deg, #6559FF, #7c6aff)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#6559FF] hover:bg-[#5449ee] px-8 py-4 rounded-lg font-semibold transition-all duration-300"
               >
-                <AnimatedText
-                  text="Automate."
-                  className="text-5xl lg:text-7xl font-bold leading-tight block text-[#6559FF]"
-                  delay={1.2}
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.1, duration: 0.8 }}
-              >
-                <AnimatedText
-                  text="Succeed."
-                  className="text-5xl lg:text-7xl font-bold leading-tight block"
-                  delay={1.6}
-                />
-              </motion.div>
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.6 }}
-              className="text-xl text-gray-200 max-w-lg"
-            >
-              <AnimatedText
-                text="Digitale Lösungen, die begeistern – automatisiert, sicher, skalierbar."
-                delay={2.2}
-                simple={true}
-              />
-            </motion.p>
-
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.5 }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 30px rgba(101, 89, 255, 0.4)",
-                background: "linear-gradient(45deg, #6559FF, #7c6aff)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#6559FF] hover:bg-[#5449ee] px-8 py-4 rounded-lg font-semibold transition-all duration-300"
-            >
-              Get Started
-            </motion.button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, x: 100 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="relative"
-          >
-            <motion.div
-              animate={{
-                rotateY: [0, 5, 0, -5, 0],
-                rotateX: [0, 2, 0, -2, 0],
-              }}
-              transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              className="relative"
-            >
-              <Image
-                src="/images/robot-head.png"
-                alt="AI Robot Head"
-                width={600}
-                height={600}
-                className="w-full h-auto drop-shadow-2xl"
-                priority
-              />
-              {/* Glowing effect */}
-              <motion.div
-                animate={{ opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                className="absolute inset-0 bg-gradient-to-r from-[#6559FF]/20 to-blue-500/20 rounded-full blur-3xl"
-              />
+                Get Started
+              </motion.button>
             </motion.div>
-          </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, x: 100 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 1 }}
+              className="relative h-full flex items-end justify-center lg:justify-end min-h-screen"
+            >
+              <motion.div
+                animate={{
+                  rotateY: [0, 5, 0, -5, 0],
+                  rotateX: [0, 2, 0, -2, 0],
+                }}
+                transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl h-full flex items-end"
+              >
+                <Image
+                  src="/images/robot-head.png"
+                  alt="AI Robot Head"
+                  width={600}
+                  height={800}
+                  className="w-full h-auto object-contain object-bottom drop-shadow-2xl"
+                  priority
+                />
+                {/* Glowing effect */}
+                <motion.div
+                  animate={{ opacity: [0.3, 0.7, 0.3] }}
+                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                  className="absolute inset-0 bg-gradient-to-r from-[#6559FF]/20 to-blue-500/20 rounded-full blur-3xl"
+                />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Tapping Intelligence Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      {/* Tapping Intelligence Section - Remove top padding to eliminate gap */}
+      <section className="px-6 bg-black">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center py-20">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
