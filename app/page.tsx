@@ -201,7 +201,7 @@ export default function HomePage() {
       </motion.nav>
 
       {/* Hero Section - 70vh on larger screens */}
-      <section className="relative h-screen md:h-[80vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen md:h-[75vh] lg:h-[80vh] flex items-center justify-center overflow-hidden pt-5 md:pt-0">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
           <Image
@@ -278,21 +278,22 @@ export default function HomePage() {
                   simple={true}
                 />
               </motion.p>
-
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.5 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 10px 30px rgba(101, 89, 255, 0.4)",
-                  background: "linear-gradient(45deg, #6559FF, #7c6aff)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#6559FF] hover:bg-[#5449ee] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base"
-              >
-                Get Started
-              </motion.button>
+              <Link href="/contact">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 15 }}
+                  transition={{ delay: 2.5 }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 30px rgba(101, 89, 255, 0.4)",
+                    background: "linear-gradient(45deg, #6559FF, #7c6aff)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#6559FF] hover:bg-[#5449ee] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base"
+                >
+                  Get Started
+                </motion.button>
+              </Link>
             </motion.div>
 
             <motion.div
