@@ -345,15 +345,17 @@ export default function HomePage() {
         className="fixed top-0 left-0 right-0 z-50 px-3 md:px-4 lg:px-6 py-2 bg-black/90 backdrop-blur-md border-b border-gray-800/50"
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
-            <Image
-              src="/images/saema-logo.png"
-              alt="SAEMA Logo"
-              width={120}
-              height={40}
-              className="h-6 md:h-8 lg:h-12 w-auto"
-            />
-          </motion.div>
+       <Link href="/">
+  <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
+    <Image
+      src="/images/saema-logo.png"
+      alt="SAEMA Logo"
+      width={120}
+      height={40}
+      className="h-6 md:h-8 lg:h-12 w-auto"
+    />
+  </motion.div>
+</Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
