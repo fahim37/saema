@@ -203,7 +203,7 @@ export default function HomePage() {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
             <Image
-              src="/placeholder.svg?height=40&width=120&text=SAEMA"
+              src="/images/saema-logo.png"
               alt="SAEMA Logo"
               width={120}
               height={40}
@@ -287,13 +287,7 @@ export default function HomePage() {
       <section className="relative h-[720px] md:h-[80vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
-          <Image
-            src="/placeholder.svg?height=800&width=1200&text=Hero+Background"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20" />
         </div>
@@ -389,7 +383,7 @@ export default function HomePage() {
                 className="relative w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg h-full flex items-end"
               >
                 <Image
-                  src="/placeholder.svg?height=800&width=600&text=AI+Robot+Head"
+                  src="/images/robot-head.png"
                   alt="AI Robot Head"
                   width={600}
                   height={800}
@@ -448,15 +442,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.05, rotateY: 5 }}
             className="bg-gradient-to-br from-white via-gray-50 to-purple-50 p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl border border-purple-200"
           >
-            <video
-              src="/placeholder.svg?height=200&width=400&text=Video+Placeholder"
-              width={400}
-              height={200}
-              className="w-full h-auto"
-              autoPlay
-              muted
-              loop
-            >
+            <video src="/images/Saema_00.mp4" width={400} height={200} className="w-full h-auto" autoPlay muted loop>
               Your browser does not support the video tag.
             </video>
           </motion.div>
@@ -1003,7 +989,7 @@ export default function HomePage() {
           >
             <motion.div whileHover={{ scale: 1.05 }}>
               <Image
-                src="/placeholder.svg?height=40&width=120&text=SAEMA"
+                src="/images/saema-logo.png"
                 alt="SAEMA Logo"
                 width={120}
                 height={40}
