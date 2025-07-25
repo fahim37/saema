@@ -284,7 +284,7 @@ export default function HomePage() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative h-[720px] xl:h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[720px] md:[900px] 2xl:h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
           <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
