@@ -1,16 +1,30 @@
-"use client"
+"use client";
 
-import { motion, AnimatePresence } from "framer-motion"
-import { Monitor, Settings, FileText, Brain, TestTube, MessageSquare, Code, Users, Cloud, Plus } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Monitor,
+  Settings,
+  FileText,
+  Brain,
+  TestTube,
+  MessageSquare,
+  Code,
+  Users,
+  Cloud,
+  Plus,
+  Sparkles,
+  Zap,
+  Star,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" },
-}
+};
 
 const staggerContainer = {
   animate: {
@@ -18,23 +32,23 @@ const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const textReveal = {
   initial: { opacity: 0, y: 100 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.8, ease: "easeOut" },
-}
+};
 
 const letterAnimation = {
   initial: { opacity: 0, y: 50 },
   animate: { opacity: 1, y: 0 },
-}
+};
 
 const scaleOnHover = {
   whileHover: { scale: 1.05, transition: { duration: 0.2 } },
   whileTap: { scale: 0.98 },
-}
+};
 
 const colorfulHover = {
   whileHover: {
@@ -44,14 +58,19 @@ const colorfulHover = {
     transition: { duration: 0.3, ease: "easeOut" },
   },
   whileTap: { scale: 0.95 },
-}
+};
 
 const AnimatedText = ({
   text,
   className = "",
   delay = 0,
   simple = false,
-}: { text: string; className?: string; delay?: number; simple?: boolean }) => {
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  simple?: boolean;
+}) => {
   if (simple) {
     return (
       <motion.div
@@ -62,7 +81,7 @@ const AnimatedText = ({
       >
         {text}
       </motion.div>
-    )
+    );
   }
 
   return (
@@ -83,8 +102,8 @@ const AnimatedText = ({
         </motion.span>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
 const FloatingParticles = () => {
   return (
@@ -110,45 +129,57 @@ const FloatingParticles = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function HomePage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const faqData = [
     {
       question: "Was ist RPA und wie kann es meinem Unternehmen helfen?",
       answer:
         "Robotic Process Automation (RPA) ist eine Technologie, die Software-Roboter verwendet, um repetitive, regelbasierte Aufgaben zu automatisieren. RPA kann Ihrem Unternehmen helfen, Kosten zu senken, Fehler zu reduzieren, die Effizienz zu steigern und Mitarbeiter für wertvollere Tätigkeiten freizusetzen.",
+      icon: Sparkles,
+      gradient: "from-pink-500 to-purple-600",
     },
     {
       question: "Wie lange dauert die Implementierung einer RPA-Lösung?",
       answer:
         "Die Implementierungszeit variiert je nach Komplexität des Prozesses. Einfache Automatisierungen können in 2-4 Wochen implementiert werden, während komplexere Lösungen 2-6 Monate dauern können. Wir beginnen immer mit einem Pilotprojekt, um schnelle Ergebnisse zu erzielen.",
+      icon: Zap,
+      gradient: "from-cyan-400 to-blue-600",
     },
     {
       question: "Welche Prozesse eignen sich am besten für RPA?",
       answer:
         "Ideal sind regelbasierte, repetitive Prozesse mit strukturierten Daten, wie Rechnungsverarbeitung, Datenübertragung, Berichtserstellung oder Kundenservice-Anfragen. Wir analysieren Ihre Prozesse und identifizieren die besten Kandidaten für Automatisierung.",
+      icon: Settings,
+      gradient: "from-emerald-400 to-teal-600",
     },
     {
       question: "Wie sicher sind RPA-Lösungen?",
       answer:
         "Sicherheit hat höchste Priorität. Unsere RPA-Lösungen folgen strengen Sicherheitsstandards, verwenden verschlüsselte Verbindungen, sichere Authentifizierung und detaillierte Audit-Trails. Alle Zugriffe werden protokolliert und überwacht.",
+      icon: Star,
+      gradient: "from-orange-400 to-red-600",
     },
     {
       question: "Bieten Sie Support und Wartung nach der Implementierung?",
       answer:
         "Ja, wir bieten umfassenden Support und Wartung. Dies umfasst 24/7-Monitoring, regelmäßige Updates, Performance-Optimierung und schnelle Fehlerbehebung. Unser Support-Team steht Ihnen jederzeit zur Verfügung.",
+      icon: Users,
+      gradient: "from-violet-500 to-purple-600",
     },
     {
       question: "Können bestehende Systeme integriert werden?",
       answer:
         "Absolut! RPA ist darauf ausgelegt, mit bestehenden Systemen zu arbeiten, ohne diese zu verändern. Wir können praktisch jede Anwendung automatisieren - von Legacy-Systemen bis hin zu modernen Cloud-Anwendungen.",
+      icon: Cloud,
+      gradient: "from-indigo-500 to-pink-600",
     },
-  ]
+  ];
 
   const serviceGradients = [
     "from-pink-500 via-purple-500 to-indigo-500",
@@ -157,9 +188,13 @@ export default function HomePage() {
     "from-yellow-400 via-orange-500 to-red-500",
     "from-purple-500 via-pink-500 to-red-500",
     "from-indigo-500 via-purple-500 to-pink-500",
-  ]
+  ];
 
-  const valueGradients = ["from-emerald-400 to-cyan-500", "from-purple-500 to-pink-500", "from-orange-400 to-red-500"]
+  const valueGradients = [
+    "from-emerald-400 to-cyan-500",
+    "from-purple-500 to-pink-500",
+    "from-orange-400 to-red-500",
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
@@ -170,16 +205,19 @@ export default function HomePage() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 p-3 md:p-4 lg:p-6 bg-black/90 backdrop-blur-md border-b border-gray-800/50"
+        className="fixed top-0 left-0 right-0 z-50 px-3 md:px-4 lg:px-6 py-2 bg-black/90 backdrop-blur-md border-b border-gray-800/50"
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
+          <motion.div
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            className="flex items-center"
+          >
             <Image
               src="/images/saema-logo.png"
               alt="SAEMA Logo"
               width={120}
               height={40}
-              className="h-6 md:h-8 lg:h-10 w-auto"
+              className="h-6 md:h-8 lg:h-12 w-auto"
             />
           </motion.div>
 
@@ -216,7 +254,9 @@ export default function HomePage() {
             className="md:hidden w-8 h-8 flex flex-col justify-center items-center space-y-1"
           >
             <motion.span
-              animate={isMobileMenuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileMenuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }
+              }
               className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
             />
             <motion.span
@@ -224,7 +264,9 @@ export default function HomePage() {
               className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
             />
             <motion.span
-              animate={isMobileMenuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileMenuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }
+              }
               className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
             />
           </motion.button>
@@ -233,7 +275,11 @@ export default function HomePage() {
         {/* Mobile Menu */}
         <motion.div
           initial={false}
-          animate={isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+          animate={
+            isMobileMenuOpen
+              ? { height: "auto", opacity: 1 }
+              : { height: 0, opacity: 0 }
+          }
           transition={{ duration: 0.3 }}
           className="md:hidden overflow-hidden bg-gradient-to-r from-pink-500/10 to-purple-500/10 backdrop-blur-md rounded-lg mt-4"
         >
@@ -242,7 +288,11 @@ export default function HomePage() {
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
-                animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                animate={
+                  isMobileMenuOpen
+                    ? { opacity: 1, x: 0 }
+                    : { opacity: 0, x: -20 }
+                }
                 transition={{ delay: index * 0.1 }}
               >
                 <Link
@@ -262,7 +312,13 @@ export default function HomePage() {
       <section className="relative h-screen md:h-[80vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
-          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
+          <Image
+            src="/images/hero-bg.webp"
+            alt="Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20" />
         </div>
@@ -276,7 +332,10 @@ export default function HomePage() {
                 transition={{ delay: 0.5 }}
                 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-xs md:text-sm font-semibold tracking-wider uppercase"
               >
-                <AnimatedText text="ARTIFICIAL INTELLIGENCE AND ROBOTICS" delay={0.5} />
+                <AnimatedText
+                  text="ARTIFICIAL INTELLIGENCE AND ROBOTICS"
+                  delay={0.5}
+                />
               </motion.p>
 
               <div className="space-y-2 md:space-y-4">
@@ -335,7 +394,8 @@ export default function HomePage() {
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(236, 72, 153, 0.4)",
-                  background: "linear-gradient(45deg, #ec4899, #8b5cf6, #06b6d4)",
+                  background:
+                    "linear-gradient(45deg, #ec4899, #8b5cf6, #06b6d4)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base shadow-lg"
@@ -355,7 +415,11 @@ export default function HomePage() {
                   rotateY: [0, 5, 0, -5, 0],
                   rotateX: [0, 2, 0, -2, 0],
                 }}
-                transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                transition={{
+                  duration: 6,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
                 className="relative w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg h-full flex items-end"
               >
                 <Image
@@ -405,9 +469,11 @@ export default function HomePage() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-base md:text-lg text-gray-300 leading-relaxed"
             >
-              Nutzen Sie das volle Potenzial Ihrer Organisation durch den gezielten Einsatz von Talent und Technologie.
-              Unsere erfahrenen Berater und Entwickler kombinieren ihre Expertise in RPA und KI, um maßgeschneiderte
-              Lösungen zu schaffen, die Ihre Geschäftsprozesse revolutionieren.
+              Nutzen Sie das volle Potenzial Ihrer Organisation durch den
+              gezielten Einsatz von Talent und Technologie. Unsere erfahrenen
+              Berater und Entwickler kombinieren ihre Expertise in RPA und KI,
+              um maßgeschneiderte Lösungen zu schaffen, die Ihre
+              Geschäftsprozesse revolutionieren.
             </motion.p>
           </motion.div>
 
@@ -419,7 +485,17 @@ export default function HomePage() {
             whileHover={{ scale: 1.05, rotateY: 5 }}
             className="bg-gradient-to-br from-white via-gray-50 to-purple-50 p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl border border-purple-200"
           >
-            <Image src="/images/saema-logo.png" alt="SAEMA Logo" width={400} height={200} className="w-full h-auto" />
+            <video
+              src="/images/Saema_00.mp4"
+              width={400}
+              height={200}
+              className="w-full h-auto"
+              autoPlay
+              muted
+              loop
+            >
+              Your browser does not support the video tag.
+            </video>
           </motion.div>
         </div>
       </section>
@@ -521,7 +597,10 @@ export default function HomePage() {
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-90 group-hover:opacity-100 transition-all duration-500`}
                   whileHover={{
-                    background: `linear-gradient(135deg, ${service.hoverGradient.replace("from-", "").replace(" via-", ", ").replace(" to-", ", ")})`,
+                    background: `linear-gradient(135deg, ${service.hoverGradient
+                      .replace("from-", "")
+                      .replace(" via-", ", ")
+                      .replace(" to-", ", ")})`,
                     scale: 1.1,
                   }}
                 />
@@ -569,6 +648,10 @@ export default function HomePage() {
                 <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
                   <motion.div
                     className="w-12 h-12 md:w-16 md:h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-white/30 transition-all duration-300"
+                    animate={{
+                      rotate: 0,
+                      scale: 1,
+                    }}
                     whileHover={{
                       rotate: 360,
                       scale: 1.2,
@@ -599,7 +682,7 @@ export default function HomePage() {
                   </motion.p>
 
                   {/* Hover indicator */}
-                  <motion.div
+                  {/* <motion.div
                     className="mt-4 flex items-center text-white/80 opacity-0 group-hover:opacity-100 transition-all duration-300"
                     initial={{ x: -20 }}
                     whileHover={{ x: 0 }}
@@ -608,11 +691,14 @@ export default function HomePage() {
                     <motion.div
                       className="ml-2 w-4 h-4"
                       animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
                     >
                       →
                     </motion.div>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
 
                 {/* Border glow effect */}
@@ -651,7 +737,10 @@ export default function HomePage() {
               <AnimatedText text="OUR VALUE" />
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <AnimatedText text="The power of applied intelligence." delay={0.3} />
+              <AnimatedText
+                text="The power of applied intelligence."
+                delay={0.3}
+              />
             </h2>
           </motion.div>
 
@@ -708,16 +797,13 @@ export default function HomePage() {
                     ease: "linear",
                   }}
                 >
-                  <div className={`w-full h-full bg-gradient-to-r ${value.gradient} rounded-full blur-3xl`} />
+                  <div
+                    className={`w-full h-full bg-gradient-to-r ${value.gradient} rounded-full blur-3xl`}
+                  />
                 </motion.div>
 
                 <motion.div
                   className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${value.gradient} rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500`}
-                  whileHover={{
-                    scale: 1.3,
-                    rotate: 15,
-                    boxShadow: "0 20px 60px rgba(139, 92, 246, 0.4)",
-                  }}
                   animate={{
                     boxShadow: [
                       "0 10px 30px rgba(139, 92, 246, 0.2)",
@@ -725,18 +811,42 @@ export default function HomePage() {
                       "0 10px 30px rgba(139, 92, 246, 0.2)",
                     ],
                   }}
+                  whileHover={{
+                    scale: 1.3,
+                    rotate: 15,
+                    boxShadow: "0 20px 60px rgba(139, 92, 246, 0.4)",
+                  }}
                   transition={{
-                    boxShadow: { duration: 3, repeat: Number.POSITIVE_INFINITY },
+                    boxShadow: {
+                      duration: 3,
+                      repeat: Number.POSITIVE_INFINITY,
+                    },
                     hover: { type: "spring", stiffness: 400, damping: 10 },
                   }}
                 >
-                  <value.icon className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-lg" />
+                  <motion.div
+                    animate={{
+                      rotate: 0,
+                      scale: 1,
+                    }}
+                    whileHover={{
+                      rotate: 360,
+                      scale: 1.1,
+                    }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <value.icon className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-lg" />
+                  </motion.div>
 
                   {/* Rotating ring */}
                   <motion.div
                     className="absolute inset-0 border-2 border-white/30 rounded-full"
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                    transition={{
+                      duration: 4,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "linear",
+                    }}
                   />
                 </motion.div>
 
@@ -785,8 +895,33 @@ export default function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 md:py-16 lg:py-20 px-4 md:px-6 relative">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-12 md:py-16 lg:py-20 px-4 md:px-6 relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 opacity-10">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-32 h-32 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-3xl"
+              animate={{
+                x: [0, Math.random() * 200 - 100],
+                y: [0, Math.random() * 200 - 100],
+                scale: [0.5, 1.5, 0.5],
+                opacity: [0.1, 0.3, 0.1],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 5,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -794,26 +929,45 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16"
           >
-            <motion.p
-              className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4"
+            <motion.div
+              className="inline-block mb-4"
               animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.05, 1],
               }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
             >
-              <AnimatedText text="Got Inquiries?" />
-            </motion.p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <AnimatedText text="Read Our Frequently Asked Questions" delay={0.3} />
+              <motion.p
+                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-xs md:text-sm font-semibold tracking-wider uppercase"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+                style={{
+                  backgroundSize: "200% 200%",
+                }}
+              >
+                <AnimatedText text="Got Inquiries?" />
+              </motion.p>
+            </motion.div>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Read Our Frequently Asked Questions
             </h2>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="text-gray-400 mt-4 max-w-2xl mx-auto"
+              className="text-gray-400 max-w-2xl mx-auto text-lg"
             >
-              Our FAQ section offers clear answers to common concerns, helping you navigate our services with ease.
+              Our FAQ section offers clear answers to common concerns, helping
+              you navigate our services with ease.
             </motion.p>
           </motion.div>
 
@@ -822,51 +976,209 @@ export default function HomePage() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="space-y-4"
+            className="space-y-6"
           >
             {faqData.map((faq, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="border border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300"
+                className="group relative overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <motion.button
-                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                  className="w-full px-6 py-6 text-left flex justify-between items-center group"
-                  whileHover={{ backgroundColor: "rgba(139, 92, 246, 0.05)" }}
-                >
-                  <span className="text-lg font-semibold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-300">
-                    {faq.question}
-                  </span>
-                  <motion.div
-                    animate={{ rotate: openFAQ === index ? 45 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 ml-4"
-                  >
-                    <Plus className="w-5 h-5 text-white" />
-                  </motion.div>
-                </motion.button>
+                {/* Animated background gradient */}
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-r ${faq.gradient} opacity-0 group-hover:opacity-20 transition-all duration-500 rounded-2xl`}
+                  animate={{
+                    background: [
+                      `linear-gradient(45deg, ${faq.gradient
+                        .replace("from-", "")
+                        .replace(" to-", ", ")})`,
+                      `linear-gradient(135deg, ${faq.gradient
+                        .replace("from-", "")
+                        .replace(" to-", ", ")})`,
+                      `linear-gradient(225deg, ${faq.gradient
+                        .replace("from-", "")
+                        .replace(" to-", ", ")})`,
+                      `linear-gradient(315deg, ${faq.gradient
+                        .replace("from-", "")
+                        .replace(" to-", ", ")})`,
+                      `linear-gradient(45deg, ${faq.gradient
+                        .replace("from-", "")
+                        .replace(" to-", ", ")})`,
+                    ],
+                  }}
+                  transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+                />
 
-                <AnimatePresence>
-                  {openFAQ === index && (
+                {/* Main card */}
+                <motion.div
+                  className="relative border border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm group-hover:border-purple-500/50 transition-all duration-500"
+                  whileHover={{
+                    boxShadow: "0 20px 60px rgba(139, 92, 246, 0.3)",
+                    borderColor: "rgba(139, 92, 246, 0.8)",
+                  }}
+                >
+                  <motion.button
+                    onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                    className="w-full px-6 py-6 text-left flex justify-between items-center group/button relative"
+                    whileHover={{ backgroundColor: "rgba(139, 92, 246, 0.1)" }}
+                  >
+                    {/* Icon */}
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                      className={`w-12 h-12 bg-gradient-to-r ${faq.gradient} rounded-xl flex items-center justify-center mr-4 flex-shrink-0`}
+                      whileHover={{
+                        scale: 1.1,
+                        rotate: 10,
+                        boxShadow: "0 10px 30px rgba(139, 92, 246, 0.4)",
+                      }}
+                      animate={{
+                        boxShadow: [
+                          "0 5px 15px rgba(139, 92, 246, 0.2)",
+                          "0 8px 25px rgba(236, 72, 153, 0.3)",
+                          "0 5px 15px rgba(139, 92, 246, 0.2)",
+                        ],
+                      }}
+                      transition={{
+                        boxShadow: {
+                          duration: 3,
+                          repeat: Number.POSITIVE_INFINITY,
+                        },
+                        hover: { type: "spring", stiffness: 400, damping: 10 },
+                      }}
                     >
-                      <motion.div
-                        initial={{ y: -20 }}
-                        animate={{ y: 0 }}
-                        exit={{ y: -20 }}
-                        className="px-6 pb-6 text-gray-300 leading-relaxed border-t border-gray-700/50"
-                      >
-                        <div className="pt-4">{faq.answer}</div>
-                      </motion.div>
+                      <faq.icon className="w-6 h-6 text-white" />
                     </motion.div>
-                  )}
-                </AnimatePresence>
+
+                    {/* Question text */}
+                    <motion.span
+                      className="text-lg font-semibold text-white group-hover/button:text-transparent group-hover/button:bg-clip-text group-hover/button:bg-gradient-to-r group-hover/button:from-pink-500 group-hover/button:to-purple-500 transition-all duration-300 flex-grow"
+                      whileHover={{ x: 5 }}
+                    >
+                      {faq.question}
+                    </motion.span>
+
+                    {/* Plus/Minus button */}
+                    <motion.div
+                      className={`w-10 h-10 bg-gradient-to-r ${faq.gradient} rounded-full flex items-center justify-center flex-shrink-0 ml-4 relative overflow-hidden`}
+                      animate={{ rotate: openFAQ === index ? 45 : 0 }}
+                      whileHover={{
+                        scale: 1.1,
+                        boxShadow: "0 10px 30px rgba(139, 92, 246, 0.4)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Plus className="w-5 h-5 text-white relative z-10" />
+
+                      {/* Rotating background */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "linear",
+                        }}
+                      />
+                    </motion.div>
+
+                    {/* Hover particles */}
+                    <div className="absolute inset-0 opacity-0 group-hover/button:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"
+                          animate={{
+                            x: [0, Math.random() * 100 - 50],
+                            y: [0, Math.random() * 50 - 25],
+                            opacity: [0, 1, 0],
+                            scale: [0, 1, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Number.POSITIVE_INFINITY,
+                            delay: i * 0.2,
+                          }}
+                          style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {openFAQ === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <motion.div
+                          initial={{ y: -20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -20, opacity: 0 }}
+                          transition={{ delay: 0.1 }}
+                          className="px-6 pb-6 border-t border-gray-700/50 relative"
+                        >
+                          {/* Answer background effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5"
+                            animate={{
+                              background: [
+                                "linear-gradient(90deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05))",
+                                "linear-gradient(180deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05))",
+                                "linear-gradient(270deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05))",
+                                "linear-gradient(360deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05))",
+                              ],
+                            }}
+                            transition={{
+                              duration: 4,
+                              repeat: Number.POSITIVE_INFINITY,
+                            }}
+                          />
+
+                          <motion.div
+                            className="pt-6 text-gray-300 leading-relaxed relative z-10"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            {faq.answer}
+                          </motion.div>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                {/* Floating elements around the card */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className={`absolute w-2 h-2 bg-gradient-to-r ${faq.gradient} rounded-full`}
+                      animate={{
+                        x: [0, Math.random() * 60 - 30],
+                        y: [0, Math.random() * 60 - 30],
+                        opacity: [0, 0.8, 0],
+                        scale: [0, 1.5, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Number.POSITIVE_INFINITY,
+                        delay: i * 0.5,
+                      }}
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                    />
+                  ))}
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -892,16 +1204,18 @@ export default function HomePage() {
               />
             </motion.div>
             <div className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8 text-xs md:text-sm text-gray-400">
-              {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
-                <motion.div key={item} whileHover={{ scale: 1.05 }}>
-                  <Link
-                    href={item === "Contact" ? "/contact" : "#"}
-                    className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 transition-all duration-300"
-                  >
-                    {item}
-                  </Link>
-                </motion.div>
-              ))}
+              {["Privacy Policy", "Terms of Service", "Contact"].map(
+                (item, index) => (
+                  <motion.div key={item} whileHover={{ scale: 1.05 }}>
+                    <Link
+                      href={item === "Contact" ? "/contact" : "#"}
+                      className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 transition-all duration-300"
+                    >
+                      {item}
+                    </Link>
+                  </motion.div>
+                )
+              )}
             </div>
           </motion.div>
           <div className="text-center text-gray-500 text-xs md:text-sm mt-6 md:mt-8">
@@ -910,5 +1224,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
