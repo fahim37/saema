@@ -309,7 +309,7 @@ export default function HomePage() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen md:h-[80vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[720px] md:h-[80vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0">
           <Image
