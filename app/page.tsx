@@ -62,7 +62,7 @@ const colorfulHover = {
   whileTap: { scale: 0.95 },
 }
 
-// Enhanced Interactive Heading Component
+// Enhanced Interactive Heading Component with Click Effects
 const InteractiveHeading = ({
   children,
   className = "",
@@ -104,8 +104,8 @@ const InteractiveHeading = ({
       onHoverEnd={() => setIsHovered(false)}
       onClick={handleClick}
       whileHover={{
-        scale: 1.05,
-        textShadow: "0 0 30px rgba(236, 72, 153, 0.8)",
+        scale: 1.02,
+        textShadow: "0 0 20px rgba(236, 72, 153, 0.5)",
       }}
       whileTap={{
         scale: 0.95,
@@ -113,36 +113,36 @@ const InteractiveHeading = ({
         transition: { type: "spring", stiffness: 400, damping: 10 },
       }}
     >
-      {/* Animated background glow */}
+      {/* Reduced animated background glow */}
       <motion.div
-        className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 blur-xl -z-10`}
+        className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 blur-lg -z-10`}
         animate={{
-          opacity: isHovered ? 0.3 : 0,
-          scale: isHovered ? 1.2 : 1,
+          opacity: isHovered ? 0.1 : 0,
+          scale: isHovered ? 1.1 : 1,
         }}
         transition={{ duration: 0.3 }}
       />
 
-      {/* Particle effects on hover */}
+      {/* Reduced particle effects on hover */}
       <AnimatePresence>
         {isHovered && (
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(8)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className={`absolute w-1 h-1 bg-gradient-to-r ${gradient} rounded-full`}
+                className={`absolute w-0.5 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0, 1.5, 0],
-                  x: [0, (Math.random() - 0.5) * 100],
-                  y: [0, (Math.random() - 0.5) * 100],
+                  opacity: [0, 0.6, 0],
+                  scale: [0, 1, 0],
+                  x: [0, (Math.random() - 0.5) * 60],
+                  y: [0, (Math.random() - 0.5) * 60],
                 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 1.2,
                   repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.1,
+                  delay: i * 0.2,
                 }}
                 style={{
                   left: `${Math.random() * 100}%`,
@@ -158,8 +158,8 @@ const InteractiveHeading = ({
       <AnimatePresence>
         {isClicked && (
           <motion.div
-            className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-full opacity-30 -z-10`}
-            initial={{ scale: 0, opacity: 0.5 }}
+            className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-full opacity-20 -z-10`}
+            initial={{ scale: 0, opacity: 0.3 }}
             animate={{ scale: 2, opacity: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -167,22 +167,22 @@ const InteractiveHeading = ({
         )}
       </AnimatePresence>
 
-      {/* Text content with letter animation */}
+      {/* Text content with subtle hover effect */}
       <motion.span
         className={`relative z-10 ${
           isHovered ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}` : "text-white"
         } transition-all duration-300`}
         animate={{
-          letterSpacing: isHovered ? "0.05em" : "0em",
+          letterSpacing: isHovered ? "0.02em" : "0em",
         }}
         transition={{ duration: 0.3 }}
       >
         {children}
       </motion.span>
 
-      {/* Underline animation */}
+      {/* Subtle underline animation */}
       <motion.div
-        className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${gradient} rounded-full`}
+        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
         initial={{ width: "0%" }}
         animate={{ width: isHovered ? "100%" : "0%" }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -347,7 +347,7 @@ export default function HomePage() {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
             <Image
-              src="/placeholder.svg?height=40&width=120&text=SAEMA"
+              src="/images/saema-logo.png"
               alt="SAEMA Logo"
               width={120}
               height={40}
@@ -431,15 +431,9 @@ export default function HomePage() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative h-[720px] md:h-[900px] 2xl:h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[720px] md:h-[750px] 2xl:h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/placeholder.svg?height=900&width=1600&text=Hero+Background"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20" />
         </div>
@@ -524,7 +518,7 @@ export default function HomePage() {
                 className="relative w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg h-full flex items-end"
               >
                 <Image
-                  src="/placeholder.svg?height=800&width=600&text=AI+Robot+Head"
+                  src="/images/robot-head.png"
                   alt="AI Robot Head"
                   width={600}
                   height={800}
@@ -590,15 +584,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.05, rotateY: 5 }}
             className="bg-gradient-to-br from-white via-gray-50 to-purple-50 p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl border border-purple-200"
           >
-            <video
-              src="/placeholder.svg?height=200&width=400&text=Video+Placeholder"
-              width={400}
-              height={200}
-              className="w-full h-auto"
-              autoPlay
-              muted
-              loop
-            >
+            <video src="/images/Saema_00.mp4" width={400} height={200} className="w-full h-auto" autoPlay muted loop>
               Your browser does not support the video tag.
             </video>
           </motion.div>
@@ -1008,7 +994,7 @@ export default function HomePage() {
               className="mb-6 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent"
               onClick={() => console.log("FAQ heading clicked!")}
             >
-              Read Our Frequently Asked Questions
+              Frequently Asked Questions
             </InteractiveHeading>
 
             <motion.p
@@ -1154,7 +1140,7 @@ export default function HomePage() {
           >
             <motion.div whileHover={{ scale: 1.05 }}>
               <Image
-                src="/placeholder.svg?height=40&width=120&text=SAEMA"
+                src="/images/saema-logo.png"
                 alt="SAEMA Logo"
                 width={120}
                 height={40}
