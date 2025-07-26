@@ -1,7 +1,5 @@
 "use client"
-
 import type React from "react"
-
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Monitor,
@@ -67,7 +65,7 @@ const InteractiveHeading = ({
   children,
   className = "",
   size = "large",
-  gradient = "from-pink-500 to-purple-500",
+  gradient = "from-[#5F39BB] via-[#8B5CF6] to-[#D8B4FE]",
   delay = 0,
   onClick,
 }: {
@@ -105,7 +103,7 @@ const InteractiveHeading = ({
       onClick={handleClick}
       whileHover={{
         scale: 1.02,
-        textShadow: "0 0 20px rgba(236, 72, 153, 0.5)",
+        textShadow: "0 0 20px rgba(139, 92, 246, 0.5)",
       }}
       whileTap={{
         scale: 0.95,
@@ -198,7 +196,7 @@ const AnimatedText = ({
   delay = 0,
   simple = false,
   interactive = false,
-  gradient = "from-pink-500 to-purple-500",
+  gradient = "from-[#5F39BB] to-[#8B5CF6]",
 }: {
   text: string
   className?: string
@@ -241,8 +239,8 @@ const AnimatedText = ({
             interactive
               ? {
                   scale: 1.2,
-                  color: "#ec4899",
-                  textShadow: "0 0 10px rgba(236, 72, 153, 0.8)",
+                  color: "#5F39BB",
+                  textShadow: "0 0 10px rgba(95, 57, 187, 0.8)",
                   y: -5,
                   transition: { type: "spring", stiffness: 400, damping: 10 },
                 }
@@ -263,7 +261,7 @@ const FloatingParticles = () => {
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full opacity-20"
+          className="absolute w-2 h-2 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] rounded-full opacity-20"
           animate={{
             x: [0, 100, 0],
             y: [0, -100, 0],
@@ -345,17 +343,22 @@ export default function HomePage() {
         className="fixed top-0 left-0 right-0 z-50 px-3 md:px-4 lg:px-6 py-2 bg-black/90 backdrop-blur-md border-b border-gray-800/50"
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-       <Link href="/">
-  <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="flex items-center">
-    <Image
-      src="/images/saema-logo.png"
-      alt="SAEMA Logo"
-      width={120}
-      height={40}
-      className="h-6 md:h-8 lg:h-12 w-auto"
-    />
-  </motion.div>
-</Link>
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+              rotate: 2,
+              filter: "drop-shadow(0 0 20px rgba(95, 57, 187, 0.6))",
+            }}
+            className="flex items-center"
+          >
+            <Image
+              src="/images/saema-logo.png"
+              alt="SAEMA Logo"
+              width={160}
+              height={50}
+              className="h-8 md:h-10 lg:h-14 w-auto"
+            />
+          </motion.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
@@ -375,7 +378,7 @@ export default function HomePage() {
                     {item}
                   </motion.span>
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
                     whileHover={{ scale: 1.1 }}
                   />
                 </Link>
@@ -391,15 +394,15 @@ export default function HomePage() {
           >
             <motion.span
               animate={isMobileMenuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
+              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
             />
             <motion.span
               animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
+              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
             />
             <motion.span
               animate={isMobileMenuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300"
+              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
             />
           </motion.button>
         </div>
@@ -409,7 +412,7 @@ export default function HomePage() {
           initial={false}
           animate={isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-gradient-to-r from-pink-500/10 to-purple-500/10 backdrop-blur-md rounded-lg mt-4"
+          className="md:hidden overflow-hidden bg-gradient-to-r from-[#5F39BB]/10 to-[#8B5CF6]/10 backdrop-blur-md rounded-lg mt-4"
         >
           <div className="px-4 py-4 space-y-3">
             {["Services", "About", "Contact"].map((item, index) => (
@@ -421,7 +424,7 @@ export default function HomePage() {
               >
                 <Link
                   href={item === "Contact" ? "/contact" : "#"}
-                  className="block py-2 text-base hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 transition-all duration-300"
+                  className="block py-2 text-base hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#5F39BB] hover:to-[#8B5CF6] transition-all duration-300"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item}
@@ -437,7 +440,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5F39BB]/20 to-[#8B5CF6]/20" />
         </div>
 
         <div className="relative z-10 w-full h-full flex items-center">
@@ -447,7 +450,7 @@ export default function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-xs md:text-sm font-semibold tracking-wider uppercase"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase"
               >
                 <AnimatedText text="ARTIFICIAL INTELLIGENCE AND ROBOTICS" delay={0.5} />
               </motion.p>
@@ -456,17 +459,15 @@ export default function HomePage() {
                 <InteractiveHeading size="xlarge" delay={0.8} onClick={() => console.log("Simplify clicked!")}>
                   Simplify.
                 </InteractiveHeading>
-
                 <InteractiveHeading
                   size="xlarge"
-                  gradient="from-pink-500 to-purple-500"
+                  gradient="from-[#5F39BB] to-[#8B5CF6]"
                   delay={1.2}
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6]"
                   onClick={() => console.log("Automate clicked!")}
                 >
                   Automate.
                 </InteractiveHeading>
-
                 <InteractiveHeading size="xlarge" delay={1.6} onClick={() => console.log("Succeed clicked!")}>
                   Succeed.
                 </InteractiveHeading>
@@ -491,11 +492,11 @@ export default function HomePage() {
                 transition={{ delay: 2.5 }}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(236, 72, 153, 0.4)",
-                  background: "linear-gradient(45deg, #ec4899, #8b5cf6, #06b6d4)",
+                  boxShadow: "0 20px 40px rgba(95, 57, 187, 0.4)",
+                  background: "linear-gradient(45deg, #5F39BB, #8B5CF6, #A855F7)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base shadow-lg"
+                className="bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] hover:from-[#5F39BB] hover:to-[#7C3AED] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base shadow-lg"
               >
                 Get Started
               </motion.button>
@@ -533,7 +534,7 @@ export default function HomePage() {
                     scale: [1, 1.1, 1],
                   }}
                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                  className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 rounded-full blur-3xl"
+                  className="absolute inset-0 bg-gradient-to-r from-[#5F39BB]/20 via-[#8B5CF6]/20 to-[#A855F7]/20 rounded-full blur-3xl"
                 />
               </motion.div>
             </motion.div>
@@ -551,14 +552,23 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="space-y-4 md:space-y-6 lg:space-y-8"
           >
-            <InteractiveHeading size="large" onClick={() => console.log("Tapping Intelligence clicked!")}>
-              Tapping Intelligence
-            </InteractiveHeading>
-
             <InteractiveHeading
               size="large"
-              gradient="from-pink-500 to-purple-500"
-              className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"
+              onClick={() => console.log("Tapping Intelligence clicked!")}
+              whileHover={{
+                textShadow: "0 0 30px rgba(139, 92, 246, 0.8)",
+                background: "linear-gradient(45deg, #5F39BB, #8B5CF6, #D8B4FE)",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              Tapping Intelligence
+            </InteractiveHeading>
+            <InteractiveHeading
+              size="large"
+              gradient="from-[#5F39BB] to-[#8B5CF6]"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6]"
               delay={0.5}
               onClick={() => console.log("Through Talent clicked!")}
             >
@@ -603,10 +613,9 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16"
           >
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
               <AnimatedText text="WHAT WE OFFER" />
             </p>
-
             <InteractiveHeading size="large" onClick={() => console.log("We are intelligence in action clicked!")}>
               We are intelligence in action.
             </InteractiveHeading>
@@ -692,7 +701,7 @@ export default function HomePage() {
                   whileHover={{
                     background: `linear-gradient(135deg, ${service.hoverGradient
                       .replace("from-", "")
-                      .replace(" via-", ", ")
+                      .replace(" via-", "")
                       .replace(" to-", ", ")})`,
                     scale: 1.1,
                   }}
@@ -710,7 +719,6 @@ export default function HomePage() {
                       repeatDelay: 2,
                     }}
                   />
-
                   {[...Array(8)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -800,10 +808,9 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16"
           >
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
               <AnimatedText text="OUR VALUE" />
             </p>
-
             <InteractiveHeading size="large" onClick={() => console.log("The power of applied intelligence clicked!")}>
               The power of applied intelligence.
             </InteractiveHeading>
@@ -868,15 +875,15 @@ export default function HomePage() {
                   className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${value.gradient} rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500`}
                   animate={{
                     boxShadow: [
-                      "0 10px 30px rgba(139, 92, 246, 0.2)",
-                      "0 15px 40px rgba(236, 72, 153, 0.3)",
-                      "0 10px 30px rgba(139, 92, 246, 0.2)",
+                      "0 10px 30px rgba(95, 57, 187, 0.2)",
+                      "0 15px 40px rgba(139, 92, 246, 0.3)",
+                      "0 10px 30px rgba(95, 57, 187, 0.2)",
                     ],
                   }}
                   whileHover={{
                     scale: 1.3,
                     rotate: 15,
-                    boxShadow: "0 20px 60px rgba(139, 92, 246, 0.4)",
+                    boxShadow: "0 20px 60px rgba(95, 57, 187, 0.4)",
                   }}
                   transition={{
                     boxShadow: {
@@ -899,7 +906,6 @@ export default function HomePage() {
                   >
                     <value.icon className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-lg" />
                   </motion.div>
-
                   <motion.div
                     className="absolute inset-0 border-2 border-white/30 rounded-full"
                     animate={{ rotate: 360 }}
@@ -913,7 +919,7 @@ export default function HomePage() {
 
                 <InteractiveHeading
                   size="medium"
-                  className="text-xl md:text-2xl font-bold mb-3 md:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-300"
+                  className="text-xl md:text-2xl font-bold mb-3 md:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#5F39BB] group-hover:to-[#8B5CF6] transition-all duration-300"
                   onClick={() => console.log(`${value.title} clicked!`)}
                 >
                   {value.title}
@@ -966,7 +972,7 @@ export default function HomePage() {
             className="text-center mb-12 md:mb-16"
           >
             <motion.div
-              className="inline-block mb-4"
+              className=" mb-4"
               animate={{
                 rotate: [0, 5, -5, 0],
                 scale: [1, 1.05, 1],
@@ -978,7 +984,7 @@ export default function HomePage() {
               }}
             >
               <motion.p
-                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-xs md:text-sm font-semibold tracking-wider uppercase"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] via-[#8B5CF6] to-[#A855F7] text-xs md:text-sm font-semibold tracking-wider uppercase"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -993,7 +999,7 @@ export default function HomePage() {
 
             <InteractiveHeading
               size="large"
-              className="mb-6 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent"
+              className="mb-6 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] bg-clip-text text-transparent"
               onClick={() => console.log("FAQ heading clicked!")}
             >
               Frequently Asked Questions
@@ -1030,29 +1036,29 @@ export default function HomePage() {
                 />
 
                 <motion.div
-                  className="relative border border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm group-hover:border-purple-500/50 transition-all duration-500"
+                  className="relative border border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm group-hover:border-[#5F39BB]/50 transition-all duration-500"
                   whileHover={{
-                    boxShadow: "0 20px 60px rgba(139, 92, 246, 0.3)",
-                    borderColor: "rgba(139, 92, 246, 0.8)",
+                    boxShadow: "0 20px 60px rgba(95, 57, 187, 0.3)",
+                    borderColor: "rgba(95, 57, 187, 0.8)",
                   }}
                 >
                   <motion.button
                     onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
                     className="w-full px-6 py-6 text-left flex justify-between items-center group/button relative"
-                    whileHover={{ backgroundColor: "rgba(139, 92, 246, 0.1)" }}
+                    whileHover={{ backgroundColor: "rgba(95, 57, 187, 0.1)" }}
                   >
                     <motion.div
                       className={`w-12 h-12 bg-gradient-to-r ${faq.gradient} rounded-xl flex items-center justify-center mr-4 flex-shrink-0`}
                       whileHover={{
                         scale: 1.1,
                         rotate: 10,
-                        boxShadow: "0 10px 30px rgba(139, 92, 246, 0.4)",
+                        boxShadow: "0 10px 30px rgba(95, 57, 187, 0.4)",
                       }}
                       animate={{
                         boxShadow: [
-                          "0 5px 15px rgba(139, 92, 246, 0.2)",
-                          "0 8px 25px rgba(236, 72, 153, 0.3)",
-                          "0 5px 15px rgba(139, 92, 246, 0.2)",
+                          "0 5px 15px rgba(95, 57, 187, 0.2)",
+                          "0 8px 25px rgba(139, 92, 246, 0.3)",
+                          "0 5px 15px rgba(95, 57, 187, 0.2)",
                         ],
                       }}
                       transition={{
@@ -1067,7 +1073,7 @@ export default function HomePage() {
                     </motion.div>
 
                     <motion.span
-                      className="text-lg font-semibold text-white group-hover/button:text-transparent group-hover/button:bg-clip-text group-hover/button:bg-gradient-to-r group-hover/button:from-pink-500 group-hover/button:to-purple-500 transition-all duration-300 flex-grow"
+                      className="text-lg font-semibold text-white group-hover/button:text-transparent group-hover/button:bg-clip-text group-hover/button:bg-gradient-to-r group-hover/button:from-[#5F39BB] group-hover/button:to-[#8B5CF6] transition-all duration-300 flex-grow"
                       whileHover={{ x: 5 }}
                     >
                       {faq.question}
@@ -1078,7 +1084,7 @@ export default function HomePage() {
                       animate={{ rotate: openFAQ === index ? 45 : 0 }}
                       whileHover={{
                         scale: 1.1,
-                        boxShadow: "0 10px 30px rgba(139, 92, 246, 0.4)",
+                        boxShadow: "0 10px 30px rgba(95, 57, 187, 0.4)",
                       }}
                       transition={{ duration: 0.3 }}
                     >
@@ -1111,7 +1117,7 @@ export default function HomePage() {
                           transition={{ delay: 0.1 }}
                           className="px-6 pb-6 border-t border-gray-700/50 relative"
                         >
-                          <motion.div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5" />
+                          <motion.div className="absolute inset-0 bg-gradient-to-r from-[#5F39BB]/5 to-[#8B5CF6]/5" />
                           <motion.div
                             className="pt-6 text-gray-300 leading-relaxed relative z-10"
                             initial={{ opacity: 0 }}
@@ -1140,7 +1146,24 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
           >
-            <motion.div whileHover={{ scale: 1.05 }}>
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+                y: -5,
+                filter: "drop-shadow(0 0 20px rgba(95, 57, 187, 0.6))",
+              }}
+              animate={{
+                y: [0, -5, 0],
+              }}
+              transition={{
+                y: {
+                  duration: 2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                },
+                hover: { type: "spring", stiffness: 400, damping: 10 },
+              }}
+            >
               <Image
                 src="/images/saema-logo.png"
                 alt="SAEMA Logo"
@@ -1155,7 +1178,7 @@ export default function HomePage() {
                 <motion.div key={item} whileHover={{ scale: 1.05 }}>
                   <Link
                     href={item === "Contact" ? "/contact" : "#"}
-                    className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 transition-all duration-300"
+                    className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#5F39BB] hover:to-[#8B5CF6] transition-all duration-300"
                   >
                     {item}
                   </Link>
