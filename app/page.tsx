@@ -362,7 +362,7 @@ export default function HomePage() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {["Services", "About", "Contact"].map((item, index) => (
+            {[ "Contact"].map((item, index) => (
               <motion.div key={item}>
                 <Link
                   href={item === "Contact" ? "/contact" : "#"}
@@ -415,7 +415,7 @@ export default function HomePage() {
           className="md:hidden overflow-hidden bg-gradient-to-r from-[#5F39BB]/10 to-[#8B5CF6]/10 backdrop-blur-md rounded-lg mt-4"
         >
           <div className="px-4 py-4 space-y-3">
-            {["Services", "About", "Contact"].map((item, index) => (
+            {[ "Contact"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
