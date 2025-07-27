@@ -1,4 +1,5 @@
 "use client"
+
 import type React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -60,7 +61,7 @@ const colorfulHover = {
   whileTap: { scale: 0.95 },
 }
 
-// Enhanced Interactive Heading Component with Click Effects
+// Enhanced Interactive Heading Component with Click Effects and Reverse Option
 const InteractiveHeading = ({
   children,
   className = "",
@@ -68,6 +69,7 @@ const InteractiveHeading = ({
   gradient = "from-[#5F39BB] via-[#8B5CF6] to-[#D8B4FE]",
   delay = 0,
   onClick,
+  reverse = false, // New prop for reverse hover effect
 }: {
   children: React.ReactNode
   className?: string
@@ -75,6 +77,7 @@ const InteractiveHeading = ({
   gradient?: string
   delay?: number
   onClick?: () => void
+  reverse?: boolean // New prop
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
@@ -103,7 +106,7 @@ const InteractiveHeading = ({
       onClick={handleClick}
       whileHover={{
         scale: 1.02,
-        textShadow: "0 0 20px rgba(139, 92, 246, 0.5)",
+        textShadow: reverse ? "0 0 20px rgba(255, 255, 255, 0.5)" : "0 0 20px rgba(139, 92, 246, 0.5)",
       }}
       whileTap={{
         scale: 0.95,
@@ -165,10 +168,18 @@ const InteractiveHeading = ({
         )}
       </AnimatePresence>
 
-      {/* Text content with subtle hover effect */}
+      {/* Text content with hover effect - reversed logic for reverse prop */}
       <motion.span
         className={`relative z-10 ${
-          isHovered ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}` : "text-white"
+          reverse
+            ? // Reverse: starts with gradient, becomes white on hover
+              isHovered
+              ? "text-white"
+              : `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+            : // Normal: starts white, becomes gradient on hover
+              isHovered
+              ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+              : "text-white"
         } transition-all duration-300`}
         animate={{
           letterSpacing: isHovered ? "0.02em" : "0em",
@@ -352,7 +363,7 @@ export default function HomePage() {
             className="flex items-center"
           >
             <Image
-              src="/images/saema-logo.png"
+              src="/placeholder.svg?height=50&width=160"
               alt="SAEMA Logo"
               width={160}
               height={50}
@@ -362,7 +373,7 @@ export default function HomePage() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {[ "Contact"].map((item, index) => (
+            {["Contact"].map((item, index) => (
               <motion.div key={item}>
                 <Link
                   href={item === "Contact" ? "/contact" : "#"}
@@ -415,7 +426,7 @@ export default function HomePage() {
           className="md:hidden overflow-hidden bg-gradient-to-r from-[#5F39BB]/10 to-[#8B5CF6]/10 backdrop-blur-md rounded-lg mt-4"
         >
           <div className="px-4 py-4 space-y-3">
-            {[ "Contact"].map((item, index) => (
+            {["Contact"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -20 }}
@@ -438,7 +449,13 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[720px] md:h-[750px] 2xl:h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
+          <Image
+            src="/placeholder.svg?height=800&width=1200"
+            alt="Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#5F39BB]/20 to-[#8B5CF6]/20" />
         </div>
@@ -459,15 +476,17 @@ export default function HomePage() {
                 <InteractiveHeading size="xlarge" delay={0.8} onClick={() => console.log("Simplify clicked!")}>
                   Simplify.
                 </InteractiveHeading>
+
                 <InteractiveHeading
                   size="xlarge"
                   gradient="from-[#5F39BB] to-[#8B5CF6]"
                   delay={1.2}
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6]"
+                  reverse={true} // This makes it start purple and become white on hover
                   onClick={() => console.log("Automate clicked!")}
                 >
                   Automate.
                 </InteractiveHeading>
+
                 <InteractiveHeading size="xlarge" delay={1.6} onClick={() => console.log("Succeed clicked!")}>
                   Succeed.
                 </InteractiveHeading>
@@ -521,7 +540,7 @@ export default function HomePage() {
                 className="relative w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg h-full flex items-end"
               >
                 <Image
-                  src="/images/robot-head.png"
+                  src="/placeholder.svg?height=800&width=600"
                   alt="AI Robot Head"
                   width={600}
                   height={800}
@@ -574,7 +593,6 @@ export default function HomePage() {
             >
               Through Talent.
             </InteractiveHeading>
-
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -587,7 +605,6 @@ export default function HomePage() {
               Lösungen zu schaffen, die Ihre Geschäftsprozesse revolutionieren.
             </motion.p>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -596,7 +613,15 @@ export default function HomePage() {
             whileHover={{ scale: 1.05, rotateY: 5 }}
             className="bg-gradient-to-br from-white via-gray-50 to-purple-50 p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl border border-purple-200"
           >
-            <video src="/images/Saema_00.mp4" width={400} height={200} className="w-full h-auto" autoPlay muted loop>
+            <video
+              src="/placeholder.svg?height=200&width=400"
+              width={400}
+              height={200}
+              className="w-full h-auto"
+              autoPlay
+              muted
+              loop
+            >
               Your browser does not support the video tag.
             </video>
           </motion.div>
@@ -620,7 +645,6 @@ export default function HomePage() {
               We are intelligence in action.
             </InteractiveHeading>
           </motion.div>
-
           <motion.div
             variants={staggerContainer}
             initial="initial"
@@ -706,7 +730,6 @@ export default function HomePage() {
                     scale: 1.1,
                   }}
                 />
-
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -741,7 +764,6 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-
                 <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
                   <motion.div
                     className="w-12 h-12 md:w-16 md:h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-white/30 transition-all duration-300"
@@ -758,7 +780,6 @@ export default function HomePage() {
                   >
                     <service.icon className="w-6 h-6 md:w-8 md:h-8 text-white drop-shadow-lg" />
                   </motion.div>
-
                   <InteractiveHeading
                     size="medium"
                     className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-white drop-shadow-lg"
@@ -766,7 +787,6 @@ export default function HomePage() {
                   >
                     {service.title}
                   </InteractiveHeading>
-
                   <motion.p
                     className="text-sm md:text-base text-white/90 leading-relaxed drop-shadow-sm flex-grow"
                     whileHover={{
@@ -776,7 +796,6 @@ export default function HomePage() {
                     {service.description}
                   </motion.p>
                 </div>
-
                 <motion.div
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
@@ -815,7 +834,6 @@ export default function HomePage() {
               The power of applied intelligence.
             </InteractiveHeading>
           </motion.div>
-
           <motion.div
             variants={staggerContainer}
             initial="initial"
@@ -870,7 +888,6 @@ export default function HomePage() {
                 >
                   <div className={`w-full h-full bg-gradient-to-r ${value.gradient} rounded-full blur-3xl`} />
                 </motion.div>
-
                 <motion.div
                   className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${value.gradient} rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500`}
                   animate={{
@@ -916,7 +933,6 @@ export default function HomePage() {
                     }}
                   />
                 </motion.div>
-
                 <InteractiveHeading
                   size="medium"
                   className="text-xl md:text-2xl font-bold mb-3 md:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#5F39BB] group-hover:to-[#8B5CF6] transition-all duration-300"
@@ -924,14 +940,12 @@ export default function HomePage() {
                 >
                   {value.title}
                 </InteractiveHeading>
-
                 <motion.p
                   className="text-sm md:text-base text-gray-300 leading-relaxed max-w-sm mx-auto group-hover:text-gray-200 transition-colors duration-300"
                   whileHover={{ scale: 1.02 }}
                 >
                   {value.description}
                 </motion.p>
-
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                   {[...Array(6)].map((_, i) => (
                     <motion.div
@@ -996,7 +1010,6 @@ export default function HomePage() {
                 <AnimatedText text="Got Inquiries?" />
               </motion.p>
             </motion.div>
-
             <InteractiveHeading
               size="large"
               className="mb-6 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] bg-clip-text text-transparent"
@@ -1004,7 +1017,6 @@ export default function HomePage() {
             >
               Frequently Asked Questions
             </InteractiveHeading>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1015,7 +1027,6 @@ export default function HomePage() {
               Our FAQ section offers clear answers to common concerns, helping you navigate our services with ease.
             </motion.p>
           </motion.div>
-
           <motion.div
             variants={staggerContainer}
             initial="initial"
@@ -1034,7 +1045,6 @@ export default function HomePage() {
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-r ${faq.gradient} opacity-0 group-hover:opacity-20 transition-all duration-500 rounded-2xl`}
                 />
-
                 <motion.div
                   className="relative border border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm group-hover:border-[#5F39BB]/50 transition-all duration-500"
                   whileHover={{
@@ -1071,14 +1081,12 @@ export default function HomePage() {
                     >
                       <faq.icon className="w-6 h-6 text-white" />
                     </motion.div>
-
                     <motion.span
                       className="text-lg font-semibold text-white group-hover/button:text-transparent group-hover/button:bg-clip-text group-hover/button:bg-gradient-to-r group-hover/button:from-[#5F39BB] group-hover/button:to-[#8B5CF6] transition-all duration-300 flex-grow"
                       whileHover={{ x: 5 }}
                     >
                       {faq.question}
                     </motion.span>
-
                     <motion.div
                       className={`w-10 h-10 bg-gradient-to-r ${faq.gradient} rounded-full flex items-center justify-center flex-shrink-0 ml-4 relative overflow-hidden`}
                       animate={{ rotate: openFAQ === index ? 45 : 0 }}
@@ -1100,7 +1108,6 @@ export default function HomePage() {
                       />
                     </motion.div>
                   </motion.button>
-
                   <AnimatePresence>
                     {openFAQ === index && (
                       <motion.div
@@ -1165,14 +1172,13 @@ export default function HomePage() {
               }}
             >
               <Image
-                src="/images/saema-logo.png"
+                src="/placeholder.svg?height=40&width=120"
                 alt="SAEMA Logo"
                 width={120}
                 height={40}
                 className="h-8 md:h-10 w-auto"
               />
             </motion.div>
-
             <div className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8 text-xs md:text-sm text-gray-400">
               {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
                 <motion.div key={item} whileHover={{ scale: 1.05 }}>
@@ -1186,7 +1192,6 @@ export default function HomePage() {
               ))}
             </div>
           </motion.div>
-
           <div className="text-center text-gray-500 text-xs md:text-sm mt-6 md:mt-8">
             © 2024 SAEMA. All rights reserved.
           </div>
