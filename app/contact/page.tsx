@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Mail, Phone, MapPin, Send, ArrowLeft } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import type React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Phone, MapPin, Send, ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Footer from "@/components/footer";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" },
-}
+};
 
 const staggerContainer = {
   animate: {
@@ -19,7 +20,7 @@ const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 // Enhanced Interactive Heading Component
 const InteractiveHeading = ({
@@ -30,28 +31,28 @@ const InteractiveHeading = ({
   delay = 0,
   onClick,
 }: {
-  children: React.ReactNode
-  className?: string
-  size?: "small" | "medium" | "large" | "xlarge"
-  gradient?: string
-  delay?: number
-  onClick?: () => void
+  children: React.ReactNode;
+  className?: string;
+  size?: "small" | "medium" | "large" | "xlarge";
+  gradient?: string;
+  delay?: number;
+  onClick?: () => void;
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isClicked, setIsClicked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const sizeClasses = {
     small: "text-lg md:text-xl",
     medium: "text-xl md:text-2xl lg:text-3xl",
     large: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl",
     xlarge: "text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl",
-  }
+  };
 
   const handleClick = () => {
-    setIsClicked(true)
-    setTimeout(() => setIsClicked(false), 300)
-    onClick?.()
-  }
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 300);
+    onClick?.();
+  };
 
   return (
     <motion.div
@@ -129,7 +130,9 @@ const InteractiveHeading = ({
       {/* Text content with hover effect */}
       <motion.span
         className={`relative z-10 ${
-          isHovered ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}` : "text-white"
+          isHovered
+            ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+            : "text-white"
         } transition-all duration-300`}
         animate={{
           letterSpacing: isHovered ? "0.02em" : "0em",
@@ -147,8 +150,8 @@ const InteractiveHeading = ({
         transition={{ duration: 0.4, ease: "easeInOut" }}
       />
     </motion.div>
-  )
-}
+  );
+};
 
 // Enhanced AnimatedText with hover effects
 const AnimatedText = ({
@@ -159,14 +162,14 @@ const AnimatedText = ({
   interactive = false,
   gradient = "from-[#5F39BB] to-[#8B5CF6]",
 }: {
-  text: string
-  className?: string
-  delay?: number
-  simple?: boolean
-  interactive?: boolean
-  gradient?: string
+  text: string;
+  className?: string;
+  delay?: number;
+  simple?: boolean;
+  interactive?: boolean;
+  gradient?: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   if (simple) {
     return (
@@ -181,11 +184,15 @@ const AnimatedText = ({
       >
         {text}
       </motion.div>
-    )
+    );
   }
 
   return (
-    <motion.div className={className} onHoverStart={() => setIsHovered(true)} onHoverEnd={() => setIsHovered(false)}>
+    <motion.div
+      className={className}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
       {text.split("").map((char, index) => (
         <motion.span
           key={index}
@@ -213,8 +220,8 @@ const AnimatedText = ({
         </motion.span>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
 const FloatingParticles = () => {
   return (
@@ -240,8 +247,8 @@ const FloatingParticles = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -249,19 +256,19 @@ export default function ContactPage() {
     email: "",
     company: "",
     message: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
+    console.log("Form submitted:", formData);
+    setIsSubmitting(false);
 
     // Reset form
     setFormData({
@@ -269,15 +276,17 @@ export default function ContactPage() {
       email: "",
       company: "",
       message: "",
-    })
-  }
+    });
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
@@ -348,7 +357,11 @@ export default function ContactPage() {
             </motion.p>
 
             <div className="space-y-2 md:space-y-4">
-              <InteractiveHeading size="xlarge" delay={0.5} onClick={() => console.log("Contact clicked!")}>
+              <InteractiveHeading
+                size="xlarge"
+                delay={0.5}
+                onClick={() => console.log("Contact clicked!")}
+              >
                 Contact
               </InteractiveHeading>
               <InteractiveHeading
@@ -402,9 +415,10 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                Whether you're looking to automate your first process or scale your existing RPA implementation, our
-                team of experts is here to help. We offer comprehensive consultation and can guide you through every
-                step of your automation journey.
+                Whether you're looking to automate your first process or scale
+                your existing RPA implementation, our team of experts is here to
+                help. We offer comprehensive consultation and can guide you
+                through every step of your automation journey.
               </motion.p>
             </div>
 
@@ -419,7 +433,8 @@ export default function ContactPage() {
                   icon: Mail,
                   title: "Email Us",
                   content: "hello@saema.dev",
-                  description: "Send us an email and we'll respond within 24 hours",
+                  description:
+                    "Send us an email and we'll respond within 24 hours",
                   gradient: "from-pink-500 to-purple-600",
                 },
                 {
@@ -472,7 +487,6 @@ export default function ContactPage() {
                           duration: 3,
                           repeat: Number.POSITIVE_INFINITY,
                         },
-                        hover: { type: "spring", stiffness: 400, damping: 10 },
                       }}
                     >
                       <item.icon className="w-6 h-6 md:w-8 md:h-8 text-white drop-shadow-lg" />
@@ -489,7 +503,9 @@ export default function ContactPage() {
                       >
                         {item.content}
                       </p>
-                      <p className="text-gray-400 text-xs md:text-sm">{item.description}</p>
+                      <p className="text-gray-400 text-xs md:text-sm">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
 
@@ -565,7 +581,10 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 }}
                     >
-                      <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium mb-2 text-gray-300"
+                      >
                         Name *
                       </label>
                       <motion.input
@@ -586,7 +605,10 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.9 }}
                     >
-                      <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium mb-2 text-gray-300"
+                      >
                         Email *
                       </label>
                       <motion.input
@@ -608,7 +630,10 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.0 }}
                   >
-                    <label htmlFor="company" className="block text-sm font-medium mb-2 text-gray-300">
+                    <label
+                      htmlFor="company"
+                      className="block text-sm font-medium mb-2 text-gray-300"
+                    >
                       Company
                     </label>
                     <motion.input
@@ -628,7 +653,10 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.1 }}
                   >
-                    <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium mb-2 text-gray-300"
+                    >
                       Message *
                     </label>
                     <motion.textarea
@@ -651,7 +679,8 @@ export default function ContactPage() {
                     whileHover={{
                       scale: 1.02,
                       boxShadow: "0 20px 40px rgba(95, 57, 187, 0.4)",
-                      background: "linear-gradient(45deg, #5F39BB, #8B5CF6, #A855F7)",
+                      background:
+                        "linear-gradient(45deg, #5F39BB, #8B5CF6, #A855F7)",
                     }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
@@ -669,7 +698,11 @@ export default function ContactPage() {
                         >
                           <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                            transition={{
+                              duration: 1,
+                              repeat: Number.POSITIVE_INFINITY,
+                              ease: "linear",
+                            }}
                             className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                           />
                           <span>Sending...</span>
@@ -719,9 +752,10 @@ export default function ContactPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Join the growing number of companies that have transformed their operations with SAEMA's intelligent
-            automation solutions. Let's discuss your specific needs and create a customized roadmap for your digital
-            transformation journey.
+            Join the growing number of companies that have transformed their
+            operations with SAEMA's intelligent automation solutions. Let's
+            discuss your specific needs and create a customized roadmap for your
+            digital transformation journey.
           </motion.p>
 
           <Link href="/">
@@ -749,60 +783,7 @@ export default function ContactPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-8 md:py-12 px-4 md:px-6 bg-gradient-to-t from-gray-900/50 to-transparent">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
-          >
-            <motion.div
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                filter: "drop-shadow(0 0 20px rgba(95, 57, 187, 0.6))",
-              }}
-              animate={{
-                y: [0, -5, 0],
-              }}
-              transition={{
-                y: {
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                },
-                hover: { type: "spring", stiffness: 400, damping: 10 },
-              }}
-            >
-              <Image
-                src="/images/saema-logo.png"
-                alt="SAEMA Logo"
-                width={120}
-                height={40}
-                className="h-8 md:h-10 w-auto"
-              />
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8 text-xs md:text-sm text-gray-400">
-              {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
-                <motion.div key={item} whileHover={{ scale: 1.05 }}>
-                  <Link
-                    href={item === "Contact" ? "/contact" : "#"}
-                    className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#5F39BB] hover:to-[#8B5CF6] transition-all duration-300"
-                  >
-                    {item}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <div className="text-center text-gray-500 text-xs md:text-sm mt-6 md:mt-8">
-            © 2024 SAEMA. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
-  )
+  );
 }

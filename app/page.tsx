@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import type React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Monitor,
   Settings,
@@ -16,16 +16,18 @@ import {
   Sparkles,
   Zap,
   Star,
-} from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" },
-}
+};
 
 const staggerContainer = {
   animate: {
@@ -33,23 +35,23 @@ const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const textReveal = {
   initial: { opacity: 0, y: 100 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.8, ease: "easeOut" },
-}
+};
 
 const letterAnimation = {
   initial: { opacity: 0, y: 50 },
   animate: { opacity: 1, y: 0 },
-}
+};
 
 const scaleOnHover = {
   whileHover: { scale: 1.05, transition: { duration: 0.2 } },
   whileTap: { scale: 0.98 },
-}
+};
 
 const colorfulHover = {
   whileHover: {
@@ -59,7 +61,7 @@ const colorfulHover = {
     transition: { duration: 0.3, ease: "easeOut" },
   },
   whileTap: { scale: 0.95 },
-}
+};
 
 // Enhanced Interactive Heading Component with Click Effects and Reverse Option
 const InteractiveHeading = ({
@@ -71,29 +73,29 @@ const InteractiveHeading = ({
   onClick,
   reverse = false, // New prop for reverse hover effect
 }: {
-  children: React.ReactNode
-  className?: string
-  size?: "small" | "medium" | "large" | "xlarge"
-  gradient?: string
-  delay?: number
-  onClick?: () => void
-  reverse?: boolean // New prop
+  children: React.ReactNode;
+  className?: string;
+  size?: "small" | "medium" | "large" | "xlarge";
+  gradient?: string;
+  delay?: number;
+  onClick?: () => void;
+  reverse?: boolean; // New prop
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isClicked, setIsClicked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const sizeClasses = {
     small: "text-lg md:text-xl",
     medium: "text-xl md:text-2xl",
     large: "text-3xl md:text-4xl lg:text-5xl",
     xlarge: "text-3xl md:text-4xl lg:text-5xl xl:text-7xl",
-  }
+  };
 
   const handleClick = () => {
-    setIsClicked(true)
-    setTimeout(() => setIsClicked(false), 300)
-    onClick?.()
-  }
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 300);
+    onClick?.();
+  };
 
   return (
     <motion.div
@@ -106,7 +108,9 @@ const InteractiveHeading = ({
       onClick={handleClick}
       whileHover={{
         scale: 1.02,
-        textShadow: reverse ? "0 0 20px rgba(255, 255, 255, 0.5)" : "0 0 20px rgba(139, 92, 246, 0.5)",
+        textShadow: reverse
+          ? "0 0 20px rgba(255, 255, 255, 0.5)"
+          : "0 0 20px rgba(139, 92, 246, 0.5)",
       }}
       whileTap={{
         scale: 0.95,
@@ -177,9 +181,9 @@ const InteractiveHeading = ({
               ? "text-white"
               : `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
             : // Normal: starts white, becomes gradient on hover
-              isHovered
-              ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
-              : "text-white"
+            isHovered
+            ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+            : "text-white"
         } transition-all duration-300`}
         animate={{
           letterSpacing: isHovered ? "0.02em" : "0em",
@@ -197,8 +201,8 @@ const InteractiveHeading = ({
         transition={{ duration: 0.4, ease: "easeInOut" }}
       />
     </motion.div>
-  )
-}
+  );
+};
 
 // Enhanced AnimatedText with hover effects
 const AnimatedText = ({
@@ -209,14 +213,14 @@ const AnimatedText = ({
   interactive = false,
   gradient = "from-[#5F39BB] to-[#8B5CF6]",
 }: {
-  text: string
-  className?: string
-  delay?: number
-  simple?: boolean
-  interactive?: boolean
-  gradient?: string
+  text: string;
+  className?: string;
+  delay?: number;
+  simple?: boolean;
+  interactive?: boolean;
+  gradient?: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   if (simple) {
     return (
@@ -231,11 +235,15 @@ const AnimatedText = ({
       >
         {text}
       </motion.div>
-    )
+    );
   }
 
   return (
-    <motion.div className={className} onHoverStart={() => setIsHovered(true)} onHoverEnd={() => setIsHovered(false)}>
+    <motion.div
+      className={className}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
       {text.split("").map((char, index) => (
         <motion.span
           key={index}
@@ -263,8 +271,8 @@ const AnimatedText = ({
         </motion.span>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
 const FloatingParticles = () => {
   return (
@@ -290,12 +298,11 @@ const FloatingParticles = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function HomePage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const faqData = [
     {
@@ -340,116 +347,22 @@ export default function HomePage() {
       icon: Cloud,
       gradient: "from-indigo-500 to-pink-600",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       <FloatingParticles />
-
-      {/* Navigation */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-50 px-3 md:px-4 lg:px-6 py-2 bg-black/90 backdrop-blur-md border-b border-gray-800/50"
-      >
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <motion.div
-            whileHover={{
-              scale: 1.05,
-              rotate: 2,
-              filter: "drop-shadow(0 0 20px rgba(95, 57, 187, 0.6))",
-            }}
-            className="flex items-center"
-          >
-            <Image
-              src="/images/saema-logo.png"
-              alt="SAEMA Logo"
-              width={160}
-              height={50}
-              className="h-8 md:h-10 lg:h-14 w-auto"
-            />
-          </motion.div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {["Contact"].map((item, index) => (
-              <motion.div key={item}>
-                <Link
-                  href={item === "Contact" ? "/contact" : "#"}
-                  className="relative group font-medium text-sm lg:text-base"
-                >
-                  <motion.span
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    whileHover={{ y: -2 }}
-                    className="relative z-10 transition-colors duration-300 group-hover:text-white"
-                  >
-                    {item}
-                  </motion.span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-                    whileHover={{ scale: 1.1 }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden w-8 h-8 flex flex-col justify-center items-center space-y-1"
-          >
-            <motion.span
-              animate={isMobileMenuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
-            />
-            <motion.span
-              animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
-            />
-            <motion.span
-              animate={isMobileMenuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-              className="w-5 h-0.5 bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] transition-all duration-300"
-            />
-          </motion.button>
-        </div>
-
-        {/* Mobile Menu */}
-        <motion.div
-          initial={false}
-          animate={isMobileMenuOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-gradient-to-r from-[#5F39BB]/10 to-[#8B5CF6]/10 backdrop-blur-md rounded-lg mt-4"
-        >
-          <div className="px-4 py-4 space-y-3">
-            {["Contact"].map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isMobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  href={item === "Contact" ? "/contact" : "#"}
-                  className="block py-2 text-base hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#5F39BB] hover:to-[#8B5CF6] transition-all duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </motion.nav>
-
+      <Navbar />
       {/* Hero Section */}
-      <section className="relative h-[720px] md:h-[750px] 2xl:h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[700px] md:h-[750px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/hero-bg.webp" alt="Hero Background" fill className="object-cover" priority />
+          <Image
+            src="/images/hero-bg.webp"
+            alt="Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#5F39BB]/20 to-[#8B5CF6]/20" />
         </div>
@@ -463,11 +376,18 @@ export default function HomePage() {
                 transition={{ delay: 0.5 }}
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase"
               >
-                <AnimatedText text="ARTIFICIAL INTELLIGENCE AND ROBOTICS" delay={0.5} />
+                <AnimatedText
+                  text="ARTIFICIAL INTELLIGENCE AND ROBOTICS"
+                  delay={0.5}
+                />
               </motion.p>
 
               <div className="space-y-2 md:space-y-4">
-                <InteractiveHeading size="xlarge" delay={0.8} onClick={() => console.log("Simplify clicked!")}>
+                <InteractiveHeading
+                  size="xlarge"
+                  delay={0.8}
+                  onClick={() => console.log("Simplify clicked!")}
+                >
                   Simplify.
                 </InteractiveHeading>
 
@@ -481,7 +401,11 @@ export default function HomePage() {
                   Automate.
                 </InteractiveHeading>
 
-                <InteractiveHeading size="xlarge" delay={1.6} onClick={() => console.log("Succeed clicked!")}>
+                <InteractiveHeading
+                  size="xlarge"
+                  delay={1.6}
+                  onClick={() => console.log("Succeed clicked!")}
+                >
                   Succeed.
                 </InteractiveHeading>
               </div>
@@ -506,7 +430,8 @@ export default function HomePage() {
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(95, 57, 187, 0.4)",
-                  background: "linear-gradient(45deg, #5F39BB, #8B5CF6, #A855F7)",
+                  background:
+                    "linear-gradient(45deg, #5F39BB, #8B5CF6, #A855F7)",
                 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] hover:from-[#5F39BB] hover:to-[#7C3AED] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base shadow-lg"
@@ -594,9 +519,11 @@ export default function HomePage() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-base md:text-lg text-gray-300 leading-relaxed"
             >
-              Nutzen Sie das volle Potenzial Ihrer Organisation durch den gezielten Einsatz von Talent und Technologie.
-              Unsere erfahrenen Berater und Entwickler kombinieren ihre Expertise in RPA und KI, um maßgeschneiderte
-              Lösungen zu schaffen, die Ihre Geschäftsprozesse revolutionieren.
+              Nutzen Sie das volle Potenzial Ihrer Organisation durch den
+              gezielten Einsatz von Talent und Technologie. Unsere erfahrenen
+              Berater und Entwickler kombinieren ihre Expertise in RPA und KI,
+              um maßgeschneiderte Lösungen zu schaffen, die Ihre
+              Geschäftsprozesse revolutionieren.
             </motion.p>
           </motion.div>
           <motion.div
@@ -605,9 +532,17 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             whileHover={{ scale: 1.05, rotateY: 5 }}
-            className="bg-gradient-to-br from-white via-gray-50 to-purple-50 p-6 md:p-8 lg:p-12 rounded-2xl shadow-2xl border border-purple-200"
+            className="bg-gradient-to-br from-white via-gray-50 to-purple-50  rounded-2xl shadow-2xl border border-purple-200"
           >
-            <video src="/images/Saema_00.mp4" width={400} height={200} className="w-full h-auto" autoPlay muted loop>
+            <video
+              src="/images/Saema_00.mp4"
+              width={400}
+              height={200}
+              className="w-full h-auto rounded-2xl"
+              autoPlay
+              muted
+              loop
+            >
               Your browser does not support the video tag.
             </video>
           </motion.div>
@@ -627,7 +562,12 @@ export default function HomePage() {
             <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
               <AnimatedText text="WHAT WE OFFER" />
             </p>
-            <InteractiveHeading size="large" onClick={() => console.log("We are intelligence in action clicked!")}>
+            <InteractiveHeading
+              size="large"
+              onClick={() =>
+                console.log("We are intelligence in action clicked!")
+              }
+            >
               We are intelligence in action.
             </InteractiveHeading>
           </motion.div>
@@ -816,7 +756,12 @@ export default function HomePage() {
             <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] text-xs md:text-sm font-semibold tracking-wider uppercase mb-3 md:mb-4">
               <AnimatedText text="OUR VALUE" />
             </p>
-            <InteractiveHeading size="large" onClick={() => console.log("The power of applied intelligence clicked!")}>
+            <InteractiveHeading
+              size="large"
+              onClick={() =>
+                console.log("The power of applied intelligence clicked!")
+              }
+            >
               The power of applied intelligence.
             </InteractiveHeading>
           </motion.div>
@@ -872,7 +817,9 @@ export default function HomePage() {
                     ease: "linear",
                   }}
                 >
-                  <div className={`w-full h-full bg-gradient-to-r ${value.gradient} rounded-full blur-3xl`} />
+                  <div
+                    className={`w-full h-full bg-gradient-to-r ${value.gradient} rounded-full blur-3xl`}
+                  />
                 </motion.div>
                 <motion.div
                   className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${value.gradient} rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500`}
@@ -1010,7 +957,8 @@ export default function HomePage() {
               transition={{ delay: 0.5 }}
               className="text-gray-400 max-w-2xl mx-auto text-lg"
             >
-              Our FAQ section offers clear answers to common concerns, helping you navigate our services with ease.
+              Our FAQ section offers clear answers to common concerns, helping
+              you navigate our services with ease.
             </motion.p>
           </motion.div>
           <motion.div
@@ -1131,58 +1079,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-8 md:py-12 px-4 md:px-6 bg-gradient-to-t from-gray-900/50 to-transparent">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
-          >
-            <motion.div
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                filter: "drop-shadow(0 0 20px rgba(95, 57, 187, 0.6))",
-              }}
-              animate={{
-                y: [0, -5, 0],
-              }}
-              transition={{
-                y: {
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                },
-                hover: { type: "spring", stiffness: 400, damping: 10 },
-              }}
-            >
-              <Image
-                src="/images/saema-logo.png"
-                alt="SAEMA Logo"
-                width={120}
-                height={40}
-                className="h-8 md:h-10 w-auto"
-              />
-            </motion.div>
-            <div className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8 text-xs md:text-sm text-gray-400">
-              {["Privacy Policy", "Terms of Service", "Contact"].map((item, index) => (
-                <motion.div key={item} whileHover={{ scale: 1.05 }}>
-                  <Link
-                    href={item === "Contact" ? "/contact" : "#"}
-                    className="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#5F39BB] hover:to-[#8B5CF6] transition-all duration-300"
-                  >
-                    {item}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <div className="text-center text-gray-500 text-xs md:text-sm mt-6 md:mt-8">
-            © 2024 SAEMA. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
-  )
+  );
 }
