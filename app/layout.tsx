@@ -4,7 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Saema",
   description: "Saema",
-  generator: "Saema",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
