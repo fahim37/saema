@@ -18,7 +18,6 @@ import {
   Star,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -71,7 +70,7 @@ const InteractiveHeading = ({
   gradient = "from-[#5F39BB] via-[#8B5CF6] to-[#D8B4FE]",
   delay = 0,
   onClick,
-  reverse = false, // New prop for reverse hover effect
+  reverse = false,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -79,7 +78,7 @@ const InteractiveHeading = ({
   gradient?: string;
   delay?: number;
   onClick?: () => void;
-  reverse?: boolean; // New prop
+  reverse?: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -99,7 +98,7 @@ const InteractiveHeading = ({
 
   return (
     <motion.div
-      className={`${sizeClasses[size]} font-bold cursor-pointer relative inline-block ${className}`}
+      className={`${sizeClasses[size]} font-bold cursor-pointer block ${className}`} // Parent is `block` for full row
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.8, type: "spring", stiffness: 100 }}
@@ -118,88 +117,89 @@ const InteractiveHeading = ({
         transition: { type: "spring", stiffness: 400, damping: 10 },
       }}
     >
-      {/* Reduced animated background glow */}
-      <motion.div
-        className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 blur-lg -z-10`}
-        animate={{
-          opacity: isHovered ? 0.1 : 0,
-          scale: isHovered ? 1.1 : 1,
-        }}
-        transition={{ duration: 0.3 }}
-      />
+      {/* Inner container with inline-block to constrain underline */}
+      <div className="inline-block relative">
+        {/* Background glow (reduced) */}
+        <motion.div
+          className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 blur-lg -z-10`}
+          animate={{
+            opacity: isHovered ? 0.1 : 0,
+            scale: isHovered ? 1.1 : 1,
+          }}
+          transition={{ duration: 0.3 }}
+        />
 
-      {/* Reduced particle effects on hover */}
-      <AnimatePresence>
-        {isHovered && (
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className={`absolute w-0.5 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: [0, 0.6, 0],
-                  scale: [0, 1, 0],
-                  x: [0, (Math.random() - 0.5) * 60],
-                  y: [0, (Math.random() - 0.5) * 60],
-                }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.2,
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </AnimatePresence>
+        {/* Particles (reduced) */}
+        <AnimatePresence>
+          {isHovered && (
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute w-0.5 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{
+                    opacity: [0, 0.6, 0],
+                    scale: [0, 1, 0],
+                    x: [0, (Math.random() - 0.5) * 60],
+                    y: [0, (Math.random() - 0.5) * 60],
+                  }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    delay: i * 0.2,
+                  }}
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </AnimatePresence>
 
-      {/* Click ripple effect */}
-      <AnimatePresence>
-        {isClicked && (
-          <motion.div
-            className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-full opacity-20 -z-10`}
-            initial={{ scale: 0, opacity: 0.3 }}
-            animate={{ scale: 2, opacity: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-        )}
-      </AnimatePresence>
+        {/* Click ripple effect */}
+        <AnimatePresence>
+          {isClicked && (
+            <motion.div
+              className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-full opacity-20 -z-10`}
+              initial={{ scale: 0, opacity: 0.3 }}
+              animate={{ scale: 2, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          )}
+        </AnimatePresence>
 
-      {/* Text content with hover effect - reversed logic for reverse prop */}
-      <motion.span
-        className={`relative z-10 ${
-          reverse
-            ? // Reverse: starts with gradient, becomes white on hover
-              isHovered
-              ? "text-white"
-              : `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
-            : // Normal: starts white, becomes gradient on hover
-            isHovered
-            ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
-            : "text-white"
-        } transition-all duration-300`}
-        animate={{
-          letterSpacing: isHovered ? "0.02em" : "0em",
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        {children}
-      </motion.span>
+        {/* Text content with hover effect */}
+        <motion.span
+          className={`relative z-10 ${
+            reverse
+              ? isHovered
+                ? "text-white"
+                : `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+              : isHovered
+              ? `text-transparent bg-clip-text bg-gradient-to-r ${gradient}`
+              : "text-white"
+          } transition-all duration-300`}
+          animate={{
+            letterSpacing: isHovered ? "0.02em" : "0em",
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {children}
+        </motion.span>
 
-      {/* Subtle underline animation */}
-      <motion.div
-        className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
-        initial={{ width: "0%" }}
-        animate={{ width: isHovered ? "100%" : "0%" }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-      />
+        {/* Underline (constrained to text width) */}
+        <motion.div
+          className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r ${gradient} rounded-full opacity-60`}
+          initial={{ width: "0%" }}
+          animate={{ width: isHovered ? "100%" : "0%" }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        />
+      </div>
     </motion.div>
   );
 };
@@ -368,7 +368,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 w-full h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 w-full grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center h-full">
+          <div className="max-w-7xl mx-auto px-4 md:px-2 w-full grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center h-full">
             <motion.div className="space-y-4 md:space-y-6 lg:space-y-8 pt-16 md:pt-20 lg:pt-0">
               <motion.p
                 initial={{ opacity: 0 }}
@@ -531,8 +531,8 @@ export default function HomePage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            whileHover={{ scale: 1.05, rotateY: 5 }}
-            className="bg-gradient-to-br from-white via-gray-50 to-purple-50  rounded-2xl shadow-2xl border border-purple-200"
+            whileHover={{ scale: 1.1, rotateY: 5 }}
+            className=" "
           >
             <video
               src="/images/Saema_00.mp4"
