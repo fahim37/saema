@@ -259,24 +259,46 @@ export default function ContactPage() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatusMessage("");
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: `${formData.email} ${formData.company}`, // Optional: include company in same field
+          message: formData.message,
+        }),
+      });
 
-    console.log("Form submitted:", formData);
-    setIsSubmitting(false);
+      const result = await res.json();
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      message: "",
-    });
+      if (res.ok) {
+        setStatusMessage("Your message has been sent successfully!");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          message: "",
+        });
+      } else {
+        setStatusMessage(
+          "Failed to send your message. Please try again later."
+        );
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatusMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -671,6 +693,11 @@ export default function ContactPage() {
                       whileFocus={{ scale: 1.02 }}
                     />
                   </motion.div>
+                  {statusMessage && (
+                      <p className="text-sm mt-2 text-center text-gray-300">
+                        {statusMessage}
+                      </p>
+                    )}
 
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
@@ -687,6 +714,7 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-[#5F39BB] to-[#8B5CF6] hover:from-[#5F39BB] hover:to-[#7C3AED] px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
                   >
+                    
                     <AnimatePresence mode="wait">
                       {isSubmitting ? (
                         <motion.div
